@@ -1,8 +1,5 @@
 from functools import cmp_to_key
 
-data = open("AoC_2022_13.txt").read().strip().split('\n\n')
-part1, part2 = 0, 1
-
 
 def compare(first, second):
     if first and second:
@@ -18,12 +15,12 @@ def compare(first, second):
     return len(second) - len(first)
 
 
-packets = []
+data = open("AoC_2022_13.txt").read().strip().split('\n\n')
+part1, part2, packets = 0, 1, [[[2]], [[6]]]
 for i, pairs in enumerate(data):
     pair1, pair2 = (eval(pair) for pair in pairs.split('\n'))
-    packets.extend([pair1, pair2])
+    packets.extend((pair1, pair2))
     part1 += i + 1 if compare(pair1, pair2) > 0 else 0
-packets.extend([[[2]], [[6]]])
 packets.sort(key=cmp_to_key(compare), reverse=True)
 for i, c in enumerate(packets):
     if c in ([[2]], [[6]]):
