@@ -24,7 +24,7 @@ queue, visited, blizzards, trip = deque([(start, 0)]), set(), [], 0
 add_blizzard()
 while queue:
     (y, x), m = queue.popleft()
-    if y == h - 1 and data[y][x] == '.':
+    if (y, x) == end:
         if trip == 0:
             queue = deque([(end, m + 1)])
             part1 = m + 1
@@ -33,7 +33,7 @@ while queue:
         elif trip == 2:
             part2 = m + 1
             break
-    elif y == 0 and data[y][x] == '.' and trip == 1:
+    elif (y, x) == start and trip == 1:
         queue = deque([(start, m + 1)])
         trip += 1
         continue
