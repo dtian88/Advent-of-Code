@@ -17,8 +17,6 @@ dirs = ((0, 1), (1, 0), (0, -1), (-1, 0))
 board = []
 for i in data.split('\n'):
     board.append(i)
-for i in range(len(board)):
-    board[i] += ' ' * (len(board[0]) - len(board[i]))
 starts_left, starts_right, starts_top, starts_bottom = [], [], [], []
 for line in board:
     for i, c in enumerate(line):
@@ -37,7 +35,7 @@ for i in range(len(board[0])):
             break
 for i in range(len(board[0])):
     for j in range(len(board) - 1, -1, -1):
-        if board[j][i] != ' ':
+        if i < len(board[j]) and board[j][i] != ' ':
             starts_bottom.append(j)
             break
 pos, direction, i, current, number_flag = [0, starts_left[0]], (0, 1), 0, '', False
@@ -106,20 +104,20 @@ for d in dirs:
                         if i - 1 >= 0:
                             next_moves[(i, j, d)] = (i - 1, j, d)
                         else:
-                            next_moves[(i, j, d)] = (150 + j - 50, 0, (0, 1))
+                            next_moves[(i, j, d)] = (100 + j, 0, (0, 1))
                     elif d[1] == 1:
                         next_moves[(i, j, d)] = (i, j + 1, d)
                     else:
                         if j - 1 >= 50:
                             next_moves[(i, j, d)] = (i, j - 1, d)
                         else:
-                            next_moves[(i, j, d)] = (100 + (49 - i), 0, (0, 1))
+                            next_moves[(i, j, d)] = (149 - i, 0, (0, 1))
                 else:
                     if d[0] == 1:
                         if i + 1 < 50:
                             next_moves[(i, j, d)] = (i + 1, j, d)
                         else:
-                            next_moves[(i, j, d)] = (50 + j - 100, 99, (0, -1))
+                            next_moves[(i, j, d)] = (j - 50, 99, (0, -1))
                     elif d[0] == -1:
                         if i - 1 >= 0:
                             next_moves[(i, j, d)] = (i - 1, j, d)
@@ -129,7 +127,7 @@ for d in dirs:
                         if j + 1 < 150:
                             next_moves[(i, j, d)] = (i, j + 1, d)
                         else:
-                            next_moves[(i, j, d)] = (100 + (49 - i), 99, (0, -1))
+                            next_moves[(i, j, d)] = (149 - i, 99, (0, -1))
                     else:
                         next_moves[(i, j, d)] = (i, j - 1, d)
             elif 50 <= i < 100:
@@ -139,7 +137,7 @@ for d in dirs:
                     if j + 1 < 100:
                         next_moves[(i, j, d)] = (i, j + 1, d)
                     else:
-                        next_moves[(i, j, d)] = (49, 100 + (i - 50), (-1, 0))
+                        next_moves[(i, j, d)] = (49, 50 + i, (-1, 0))
                 else:
                     if j - 1 >= 50:
                         next_moves[(i, j, d)] = (i, j - 1, d)
@@ -166,7 +164,7 @@ for d in dirs:
                         if i + 1 < 150:
                             next_moves[(i, j, d)] = (i + 1, j, d)
                         else:
-                            next_moves[(i, j, d)] = (150 + j - 50, 49, (0, -1))
+                            next_moves[(i, j, d)] = (100 + j, 49, (0, -1))
                     elif d[0] == -1:
                         next_moves[(i, j, d)] = (i - 1, j, d)
                     elif d[1] == 1:
@@ -188,12 +186,12 @@ for d in dirs:
                     if j + 1 < 50:
                         next_moves[(i, j, d)] = (i, j + 1, d)
                     else:
-                        next_moves[(i, j, d)] = (149, 50 + i - 150, (-1, 0))
+                        next_moves[(i, j, d)] = (149, i - 100, (-1, 0))
                 else:
                     if j - 1 >= 0:
                         next_moves[(i, j, d)] = (i, j - 1, d)
                     else:
-                        next_moves[(i, j, d)] = (0, 50 + i - 150, (1, 0))
+                        next_moves[(i, j, d)] = (0, i - 100, (1, 0))
 pos, direction, i, current, number_flag = [0, starts_left[0]], (0, 1), 0, '', False
 while i <= len(moves):
     if i == len(moves) or not moves[i].isnumeric():
