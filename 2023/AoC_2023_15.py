@@ -6,7 +6,7 @@ def hash_algorithm(s):
 
 
 data = open("AoC_2023_15.txt").read().split(",")
-part1 = part2 = 0
+part1 = 0
 boxes = [{} for _ in range(256)]
 
 for step in data:
