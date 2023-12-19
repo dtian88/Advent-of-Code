@@ -31,7 +31,6 @@ def find_area(vertices, edge_points):
 print("Part 1: %d; part 2: %d" % (find_area(*find_vertices()), find_area(*find_vertices(True))))
 
 
-
 # from collections import defaultdict
 
 # data = open("AoC_2023_18.txt").read().split("\n")
