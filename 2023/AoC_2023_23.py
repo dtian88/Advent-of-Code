@@ -2,7 +2,7 @@ from collections import defaultdict, deque
 
 data = open("AoC_2023_23.txt").read().split("\n")
 data = ["#" * len(data[0])] + data + ["#" * len(data[0])]
-for i, line in enumerate(data):
+for i in range(len(data)):
   data[i] = "#" + data[i] + "#"
 part1 = 0
 
