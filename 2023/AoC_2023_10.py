@@ -1,3 +1,4 @@
+# 88/2211
 data = open("AoC_2023_10.txt").read().split('\n')
 for i, line in enumerate(data):
   if "S" in line:
